@@ -1,0 +1,89 @@
+<#assign path="${ctx!}"> 
+
+<#macro doctype>
+<!DOCTYPE html>
+</#macro> 
+
+<#macro title name>
+<title>${name} 题海泛舟</title>
+</#macro> 
+
+<#macro styles>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="favicon.ico" />
+<link href="${ctx}/static/scripts/validator/style/jquery.validator.css" rel="stylesheet" media="screen">
+<link href="${ctx}/static/scripts/bs/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" type="text/css" href="${ctx!}/static/styles/common.css" />
+<link rel="stylesheet" type="text/css" href="${ctx!}/static/scripts/grumble/css/grumble.min.css?v=5" />
+<link rel="stylesheet" type="text/css" href="${ctx!}/static/scripts/bootstrap-treeview/bootstrap-treeview.css" />
+</#macro> 
+
+<#macro scripts>
+<script src="${ctx}/static/scripts/bs/js/jquery.js"></script>
+<script src="${ctx}/static/scripts/bs/js/bootstrap.min.js"></script>
+<script src="${ctx}/static/scripts/bs/js/stickUp.min.js"></script><!-- 固定组件位置 -->
+<script src="${ctx}/static/scripts/grumble/js/jquery.grumble.min.js?v=7"></script><!-- 泡泡提示 -->
+<script src="${ctx}/static/scripts/bootstrap-treeview/bootstrap-treeview.js"></script><!-- 树状菜单 -->
+<!--[if lt IE 9]>
+<script src="${ctx}/static/scripts/bs/js/html5shiv.min.js"></script>
+<script src="${ctx}/static/scripts/bs/js/respond.min.js"></script>
+<![endif]-->
+</#macro> 
+
+<#macro validation>
+<script type="text/javascript" src="${ctx}/static/scripts/validator/jquery.validator.js"></script>
+<script type="text/javascript" src="${ctx}/static/scripts/validator/zh_CN.js"></script>
+</#macro> 
+
+<#macro layer>
+<script type="text/javascript" src="${ctx}/static/scripts/layer/layer.min.js"></script><!-- 弹出层控件 -->
+</#macro> 
+
+<#macro head>
+<!-- Fixed navbar -->
+
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation" style="background: #000; opacity: 0.6;">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand " href="${ctx!}" >
+				<img src="${ctx!}/static/styles/images/logo.png" width="120px" height="25px" >
+			</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-left" style="">
+				<#if !userName??>
+				<li><a href="${ctx!}/problem">进入题库</a></li>
+				<li><a href="${ctx!}/paper">参加考试</a></li>			
+				</#if>
+	        </ul>
+			<ul class="nav navbar-nav navbar-right" >
+				<#if !user??>
+				<li><a href="${ctx!}/login">登录</a></li>			
+				<#else>
+				<p class="navbar-text">${user.fullname}</p>
+				<li><a href="${ctx!}/login/logout" >注销</a></li>	
+				</#if>
+	        </ul>
+		</div>
+		<!--/.nav-collapse -->
+	</div>
+</div>
+</#macro> 
+
+<#macro foot>
+<hr />
+<div id="footer">
+	<div class="container">
+		<p class="text-muted">
+			设为首页 | 加入收藏 | 
+			<a class="defaultLinkWhite" href="about.html" disabled>关于我们</a> | 
+			<a class="defaultLinkWhite" href="copyright.html" disabled>网站声明</a> | 
+			<a class="defaultLinkWhite" href="contantus.html" disabled>联系我们</a>
+		</p>
+		<p class="text-muted">Copyright &copy; 2015 江西理工大学 软件121班 陈光送 联系地址：江西省赣州市红旗大道86号 邮编：341000</p>
+		<!--<p class="text-muted">技术支持：江西理工大学现代教育技术及信息中心</p>-->
+	</div>
+</div>
+</#macro>

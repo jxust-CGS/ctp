@@ -1,0 +1,145 @@
+<#include "../inc/layout.html"/> <@doctype/>
+<html>
+<head><@title name="考试"/> <@styles/>
+</head>
+
+<body
+	style="background: url('${ctx!}/static/styles/images/background/004.gif');">
+	<@head/>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12" style="opacity: 0.8;">
+				<div role="tabpanel" style=" background-color: white;">
+					<!-- Nav tabs -->
+					<ul class="nav nav-pills nav-justified" role="tablist" id="myTab">
+						<li role="presentation" class="h3 active"><a href="#exam"
+							aria-controls="home" role="tab" data-toggle="tab">考试</a></li>
+						<li role="presentation" class="h3"><a href="#test"
+							aria-controls="profile" role="tab" data-toggle="tab">训练</a></li>
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="exam">
+							<div class="panel panel-primary"  style="margin: 10px;">
+								<!-- Default panel contents -->
+								<div class="panel-heading" style="text-align: center;">考试列表</div>
+								<div class="panel-body">
+									<ul class="list-group">
+										<li class="list-group-item">Cras justo odio</li>
+										<li class="list-group-item">Dapibus ac facilisis in</li>
+										<li class="list-group-item">Morbi leo risus</li>
+										<li class="list-group-item">Porta ac consectetur ac</li>
+										<li class="list-group-item">Vestibulum at eros</li>
+										<li class="list-group-item">Cras justo odio</li>
+										<li class="list-group-item">Dapibus ac facilisis in</li>
+										<li class="list-group-item">Vestibulum at eros</li>
+										<li class="list-group-item">Vestibulum at eros</li>
+										<li class="list-group-item">Cras justo odio</li>
+										<li class="list-group-item">Dapibus ac facilisis in</li>
+										<li class="list-group-item">Morbi leo risus</li>
+										<li class="list-group-item">Porta ac consectetur ac</li>
+										<li class="list-group-item">Vestibulum at eros</li>
+									</ul>
+									<nav style="text-align: center;">
+										<ul class="pagination pagination-lg">
+											<li><a href="#" aria-label="Previous"> <span
+													aria-hidden="true">&laquo;</span>
+											</a></li>
+											<li><a href="#">1</a></li>
+											<li><a href="#">2</a></li>
+											<li><a href="#">3</a></li>
+											<li><a href="#">4</a></li>
+											<li><a href="#">5</a></li>
+											<li><a href="#">6</a></li>
+											<li><a href="#">7</a></li>
+											<li><a href="#">8</a></li>
+											<li><a href="#">9</a></li>
+											<li><a href="#">10</a></li>
+											<li><a href="#" aria-label="Next"> <span
+													aria-hidden="true">&raquo;</span>
+											</a></li>
+										</ul>
+									</nav>
+									<!-- /.nav -->
+								</div>
+								<!-- /.panel -->
+							</div>
+						</div>
+						<!-- /.exam -->
+						<div role="tabpanel" class="tab-pane" id="test"  style="margin: 10px;">
+							<div class="panel panel-primary ">
+								<!-- Default panel contents -->
+								<div class="panel-heading" style="text-align: center;">训练列表</div>
+								<div class="panel-body">
+									<ul class="list-group">
+										<li class="list-group-item">Cras justo odio</li>
+										<li class="list-group-item">Dapibus ac facilisis in</li>
+										<li class="list-group-item">Morbi leo risus</li>
+										<li class="list-group-item">Porta ac consectetur ac</li>
+										<li class="list-group-item">Vestibulum at eros</li>
+										<li class="list-group-item">Cras justo odio</li>
+										<li class="list-group-item">Dapibus ac facilisis in</li>
+										<li class="list-group-item">Vestibulum at eros</li>
+										<li class="list-group-item">Vestibulum at eros</li>
+										<li class="list-group-item">Cras justo odio</li>
+										<li class="list-group-item">Dapibus ac facilisis in</li>
+										<li class="list-group-item">Morbi leo risus</li>
+										<li class="list-group-item">Porta ac consectetur ac</li>
+										<li class="list-group-item">Vestibulum at eros</li>
+									</ul>
+									<nav style="text-align: center;">
+										<ul class="pagination pagination-lg">
+											<li><a href="#" aria-label="Previous"> <span
+													aria-hidden="true">&laquo;</span>
+											</a></li>
+											<li><a href="#">1</a></li>
+											<li><a href="#">2</a></li>
+											<li><a href="#">3</a></li>
+											<li><a href="#">4</a></li>
+											<li><a href="#">5</a></li>
+											<li><a href="#">6</a></li>
+											<li><a href="#">7</a></li>
+											<li><a href="#">8</a></li>
+											<li><a href="#">9</a></li>
+											<li><a href="#">10</a></li>
+											<li><a href="#" aria-label="Next"> <span
+													aria-hidden="true">&raquo;</span>
+											</a></li>
+										</ul>
+									</nav>
+									<!-- /.nav -->
+								</div>
+								<!-- /.panel -->
+							</div>
+						</div>
+						<!-- /.test -->
+					</div>
+				</div>
+				<!-- tabpanel  -->
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+	</div>
+	<@foot/>
+</body>
+</html>
+<@scripts />
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#treeview1').treeview({
+			color : "#428bca",
+			enableLinks : true,
+			data : ${json}
+		});
+	});
+</script>
+<script>
+	$(function() {
+	e.preventDefault()
+		$('#myTab').tab('show')
+	})
+</script>

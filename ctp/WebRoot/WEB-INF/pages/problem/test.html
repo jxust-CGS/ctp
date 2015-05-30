@@ -1,0 +1,63 @@
+<#include "../inc/layout.html"/> <@doctype/>
+<html>
+<head><@title name="练习"/> <@styles/>
+</head>
+
+<body style="background: url('${ctx!}/static/styles/images/background/004.gif');">
+	<@head/>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="container">
+		<ol class="breadcrumb"
+			style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+			<li><a href="${ctx}">首页</a></li>
+			<li><a href="${ctx}/problem">题库练习</a></li>
+			<li class="active">练习</li>
+		</ol>
+	</div>
+	<div class="container">
+		<#if problem_select??>
+		<!-- 题目为选择题 -->
+		<h2 style="text-align: center;">${problem_select.title}</h2>
+		<h4>题目正文</h4>
+		<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+			<div class="panel-body">
+				<p>${problem_select.main_body}</p>
+			</div>
+		</div>
+		<h4>请选择</h4>
+		<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+			<div class="panel-body">
+			<#list ["A", "B", "C", "D"] as x> 
+				<input type="radio" name="answer"+${problem_select.id} value=${x}/>${x}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</#list>
+			<a class="btn btn-default" style="text-align: right;">提交</a>
+			</div>
+		</div>
+		<#else >
+		<!-- 题目为判断题-->
+		<h2 style="text-align: center;">${problem_judge.title}</h2>
+		<h4>题目正文</h4>
+		<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+			<div class="panel-body">
+				<p>${problem_judge.main_body}</p>
+			</div>
+		</div>
+		<h4>请选择</h4>
+		<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+			<div class="panel-body">
+			<#list ["对", "错"] as x> 
+				<input type="radio" name="answer"+${problem_judge.id} value=${x}/>${x}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</#list>
+			<a class="btn btn-default" style="text-align: right;">提交</a>
+			</div>
+		</div>
+		</#if>
+	</div>
+	<!-- /.container -->
+	<@foot/>
+</body>
+</html>
+<@scripts />

@@ -1,0 +1,132 @@
+<#include "../inc/layout.html"/> <@doctype/>
+<html>
+<head><@title name="题库"/> <@styles/>
+</head>
+
+<body
+	style="background: url('${ctx!}/static/styles/images/background/004.gif');" >
+	<@head/>
+	<br />
+	<br />
+	<br />
+	<br />
+	<div class="container">
+		<ol class="breadcrumb"  style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+			<li><a href="${ctx}">首页</a></li>
+			<li class="active">题库练习</li>
+		</ol>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3" style="opacity: 0.8;">
+				<div class="panel panel-primary typeList">
+					<!-- Default panel contents -->
+					<div class="panel-heading">分类查找</div>
+					<div class="panel-body">
+						<div id="treeview1" class=""></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-9" style="opacity: 0.8;">
+				<form id="pagerForm" method="post" action="${ctx!}/problem">
+					<input type="hidden" name="pageNum" value="${page.pageNumber}" />
+					<input type="hidden" name="numPerPage" value="${page.pageSize}" />
+				</form>
+				<div class="panel panel-primary">
+					<!-- Default panel contents -->
+					<div class="panel-heading" style="text-align: center;">题目列表</div>
+					<div class="panel-body">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th><input type="hidden" group="ids"
+										class="checkboxCtrl" /></th>
+									<th>科目</th>
+									<th>知识点</th>
+									<th>来源</th>
+									<th>正确率</th>
+									<td>练习</td>
+								</tr>
+							</thead>
+							<tbody>
+								<#list page.list as s>
+								<tr>
+									<td><input type="hidden" name="ids" value="${s.id!}" /></td>
+									<td>${s.subject!}</td>
+									<td>${s.keyword!}</td>
+									<td>${s.source!}</td>
+									<td>${s.do_right_num!}/${s.do_right_num+s.do_error_num!}</td>
+									<td><a href="${ctx!}/problem/test/${s.id}">练习</a></td>
+								</tr>
+								</#list>
+							</tbody>
+						</table>
+						<nav style="text-align: center;">
+							<ul class="pagination">
+								<#if page.pageNumber gt 1><!-- 页码大于一，可以向前翻页 -->
+								<li><a href="${ctx!}/problem?pageNum=1">&laquo;</a></li>
+								<li><a href="${ctx!}/problem?pageNum=${page.pageNumber-1}">&lsaquo;</a></li>
+								<#else>
+								<li class="disabled"><a href="javascript:void(0)" class="disabled">&laquo;</a></li> 
+								<li class="disabled"><a href="javascript:void(0)" class="disabled">&lsaquo;</a></li>
+								</#if> 
+								<#if page.pageNumber-5 gt 0>
+								<#assign  start_pageNum = page.pageNumber-5/>
+								<#else>
+								<#assign  start_pageNum = 1 />
+								</#if> 
+								<#if page.pageNumber+5 lt page.totalPage>
+								<#assign  end_pageNum = page.pageNumber+5 />
+								<#else>
+								<#assign  end_pageNum = page.totalPage/>
+								</#if> 
+								<#list start_pageNum..end_pageNum as a>
+								<#if page.pageNumber==a>
+								<li class="active"><a href="javascript:void(0)" class="disabled">${a}</a></li> 
+								<#else>
+								<li><a href="${ctx!}/problem?pageNum=${a}">${a}</a></li> 
+								</#if>
+								</#list>
+								<#if page.pageNumber lt page.totalPage>
+								<li><a href="${ctx!}/problem?pageNum=${page.pageNumber+1}">&rsaquo;</a></li>
+								<li><a href="${ctx!}/problem?pageNum=${page.totalPage}">&raquo;</a></li>
+								<#else>
+								<li class="disabled"><a href="javascript:void(0)" class="disabled">&rsaquo;</a></li> 
+								<li class="disabled"><a href="javascript:void(0)" class="disabled">&raquo;</a></li> 
+								</#if>
+							</ul>
+						</nav>
+						<!-- /.nav -->
+					</div>
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-lg-9 -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container -->
+	<@foot/>
+</body>
+</html>
+<@scripts />
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#treeview1').treeview({
+			color : "#428bca",
+			enableLinks : true,
+			levels: 1,
+			data : ${json}
+		});
+	});
+</script>
+<script>
+	/* jQuery(function($) {
+	   $(document).ready( function() {
+	     $('.typeList').stickUp({
+	    	 marginTop: '80px'
+	     });
+	   });
+	}); */
+</script>
+

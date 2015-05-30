@@ -1,0 +1,165 @@
+<#include "inc/layout.html"/> 
+<@doctype/>
+<html lang="zh-cn">
+<head>
+<@title name="首页"/>
+<@styles/>
+<link rel="stylesheet" type="text/css" href="${ctx}/static/scripts/css3-image-mouse-hover/css/demo.css" />
+<!--必要样式  图片特效-->
+<link rel="stylesheet" type="text/css" href="${ctx}/static/scripts/css3-image-mouse-hover/css/set1.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/static/scripts/bootstrap-newsbox/site.css" />
+<style>
+.grid figure{
+max-height: 200px;
+background: #000;
+}
+</style>
+
+</head>
+
+<body  style="background: url('${ctx!}/static/styles/images/background/004.gif'); color:#333;">
+	<@head/>
+	<div class="jumbotron" style="background: url('/ctp/static/styles/images/background_index_1.jpg'); background-size:100% 640px;padding-bottom: 450px;">
+		<h1 style="color: blue;">题海泛舟系统正式上线!</h1>
+		<p class="lead" style="color: blue; text-align: right;">——江西理工大学网络考试系统正式上线，欢迎使用.</p>
+	</div>
+	<div class="container">
+		<hr/>
+
+		<div class="row">
+			<div class="col-lg-4" style="margin-top: 22px; height: 420px;">
+				<div class="panel panel-primary"  style="opacity: 0.8;">
+						<div class="panel-heading">
+							<span class="glyphicon glyphicon-list-alt"></span><b>News</b></div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-12">
+									<ul class="demo1">
+										<li class="news-item">Lorem ips <a href="#">Read more...</a></li>
+										<li class="news-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a href="#">Read more...</a></li>
+										<li class="news-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a href="#">Read more...</a></li>
+										<li class="news-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a href="#">Read more...</a></li>
+										<li class="news-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a href="#">Read more...</a></li>
+										<li class="news-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a href="#">Read more...</a></li>
+										<li class="news-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a href="#">Read more...</a></li>
+										<li class="news-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a href="#">Read more...</a></li>
+										<li class="news-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a href="#">Read more...</a></li>
+										<li class="news-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a href="#">Read more...</a></li>
+										<li class="news-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a href="#">Read more...</a></li>
+										<li class="news-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in venenatis enim... <a href="#">Read more...</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+
+						</div>
+					</div>
+				
+				
+				<!-- <h3>
+					<span class="glyphicon glyphicon-bullhorn"></span> 通知公告
+				</h3>
+				<p><a href="#">2015-5-9 14:30 举行计算机知识竞赛</a></p>
+				<p><a href="#">2015-5-1 系统正式上线</a></p>
+				<p><a href="#">2015-5-1 系统正式上线</a></p>
+				<p><a href="#">2015-5-1 系统正式上线</a></p>
+				<p><a href="#">2015-5-1 系统正式上线</a></p>
+				<p><a href="#">2015-5-1 系统正式上线</a></p>
+				<p><a href="#">2015-5-1 系统正式上线</a></p>
+				<p><a href="#">2015-5-1 系统正式上线</a></p>
+				<p><a href="#">2015-5-1 系统正式上线</a></p>
+				<p><a href="#">2015-5-1 系统正式上线</a></p>
+				<p><a href="#">更多详情 &raquo;</a></p> -->
+			</div>
+			<div class="col-lg-8">
+				<div class="grid">
+					<figure class="effect-marley">
+						<img src="${ctx!}/static/styles/images/index/index_1.jpg" alt="index_1"/>
+						<figcaption>
+							<h2><span>题库练习</span></h2>
+							<p>学生用户可以在这里做练习，希望您通过练习你能在考试中取得更好的成绩！</p>
+							<a href="${ctx!}/problem">View more</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-marley">
+						<img src="${ctx!}/static/styles/images/index/index_2.jpg" alt="index_2"/>
+						<figcaption>
+							<h2><span>参加考试</span></h2>
+							<p>学生用户可以参加考试，通过考试来检查您最近学习的成效，是骡子是马拉出来遛遛！</p>
+							<a href="${ctx!}/paper">View more</a>
+						</figcaption>			
+					</figure>
+				</div>
+				<div class="grid">
+					<figure class="effect-marley">
+						<img src="${ctx!}/static/styles/images/index/index_3.jpg" alt="index_3"/>
+						<figcaption>
+							<h2><span>错题统计</span></h2>
+							<p>自己练习时的错题都能在这找到，在哪儿跌倒就从哪儿爬起来，相信不久您就能发现错误会越来越少的，加油哟！</p>
+							<a href="${ctx!}/error">View more</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-marley">
+						<img src="${ctx!}/static/styles/images/index/index_4.jpg" alt="index_4"/>
+						<figcaption>
+							<h2><span>成绩查询</span></h2>
+							<p>查询自己的考试成绩，通过这里可以查看您所有的考试成绩，看看自己是不是越考越好！</p>
+							<a href="${ctx!}/histroy">View more</a>
+						</figcaption>			
+					</figure>
+				</div>
+				<!-- <div class="col-lg-6 " style="background-color: white;">
+					<h3> <span class="glyphicon glyphicon-calendar"></span><b> 题库练习 </b></h3>
+					<p>学生用户可以在这里做练习，希望您通过练习你能在考试中取得更好的成绩！</p>
+					<p>
+						<a class="btn btn-primary" href="${ctx}/plan" role="button">点击进入
+							&raquo;</a>
+					</p>
+				</div>
+				<div class="col-lg-6"  style="background-color: white;">
+					<h3> <span class="glyphicon glyphicon-tasks"></span><b> 参加考试 </b> </h3>
+					<p>学生用户可以参加考试，通过考试来检查您最近学习的成效，是骡子是马拉出来遛遛！</p>
+					<p>
+						<a class="btn btn-primary" href="${ctx}/viewOrder" role="button">点击进入
+							&raquo;</a>
+					</p>
+				</div>
+				<div class="col-lg-6" style="background-color: white;">
+					<h3> <span class="glyphicon glyphicon-usd"></span><b> 添加题目</b> </h3>
+					<p>老师用户和学生用户都能在这里向题库添加题目，点滴分享，成就庞大而全面的题库，是系统能更好的为您服务！</p>
+					<p>
+						<a class="btn btn-primary" href="${ctx}/charge" role="button">点击进入
+							&raquo;</a>
+					</p>
+				</div>
+				<div class="col-lg-6" style="background-color: white; height: 180px;" >
+					<h3> <span class="glyphicon glyphicon-shopping-cart"></span><b>添加试卷</b> </h3>
+					<p>老师用户在这里创建试卷，通过这里设置试卷的基本信息</p>
+					<p>
+						<a class="btn btn-primary" href="${ctx}/use" role="button">点击进入
+							&raquo;</a>
+					</p>
+				</div> -->
+			</div>
+		</div>
+		<@foot/>
+	</div>
+</body>
+</html>
+<@scripts />
+<script src="${ctx}/static/scripts/bootstrap-newsbox/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".demo1").bootstrapNews({
+            newsPerPage: 7,
+            autoplay: true,
+			pauseOnHover:true,
+            direction: 'up',
+            newsTickerInterval: 4000,
+            onToDo: function () {
+                //console.log(this);
+            }
+        });
+    });
+</script>

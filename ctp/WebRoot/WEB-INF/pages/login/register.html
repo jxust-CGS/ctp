@@ -1,0 +1,298 @@
+<#include "../inc/layout.html"/> 
+<@doctype/>
+<html>
+<head>
+<@title name="注册"/>
+<@styles/>
+</head>
+
+<body style="background: url('${ctx!}/static/styles/images/background_picture/background_register.jpg');">
+	<@head/>
+	<br><br><br>
+	<#if sign??>
+	<div class="alert alert-warning alert-dismissable">
+	  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	  <strong>系统提示!</strong> ${sign!}
+	</div>
+	</#if>
+	<div class="container">
+		<div class="col-lg-10 jumbotron" style="background-color:white; opacity: 0.8;">
+			<form class="form-signin" role="form" method="post" action="${ctx}/login/save_register">
+				<h2 class="form-signin-heading" style="text-align: center;">用户注册</h2><br>
+				<div class="row" >
+					<div class="col-lg-2" style="text-align: right;">
+						<label>用户名:</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" size="20"  id="userName" name="user.name" placeholder="推荐使用“qq+您的QQ号”" required autofocus>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2"  style="text-align: right;">
+						<label>密码:</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="password" class="form-control" size="20" id="userPassword" name="user.password" placeholder="复杂度高的密码更加安全哟！" required>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2"  style="text-align: right;">
+						<label>确认密码:</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="password" class="form-control" size="20" id="userPassword_check" name="password_check" placeholder="" required>
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-lg-2"  style="text-align: right;">
+						<label>您的身份:</label>
+					</div>
+					<div class="col-lg-6">
+						<label><input type="radio" name="user.role" id="" value="1" checked> 学生</label> 
+						<label><input type="radio" name="user.role" id="userRole" value="2" > 教师</label>
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-lg-2"  style="text-align: right;">
+						<label>真实姓名:</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" size="20" name="user.fullname" placeholder="" required>
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-lg-2"  style="text-align: right;">
+						<label>专业:</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" size="20" name="user.major" placeholder="">
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-lg-2"  style="text-align: right;">
+						<label>电话号码:</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" size="20" id="userPhone" name="user.phonenumber" placeholder="" required>
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-lg-2"  style="text-align: right;">
+						<label>QQ:</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" size="20" id="userQq" name="user.qq" placeholder="">
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-lg-2"  style="text-align: right;">
+						<label>E-mail:</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" size="20" id="userEmail" name="user.email" placeholder="">
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-lg-2" style="text-align: right;">
+						<label>验证码:</label>
+					</div>
+					<div class="col-lg-4">
+						<input type="text" class="form-control" size="4" name="code"
+							placeholder="" required>
+					</div>
+					<div class="col-lg-2">
+						<img src="${ctx}/login/jpg" id="codeimg"
+							onclick="this.src='${ctx}/login/jpg?id='+Math.random()*10"
+							title="点击更新验证码" width="120" height="35" style="vertical-align:baseline"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2 col-lg-offset-2"><button class="btn btn-lg btn-primary btn-block" type="submit">确认注册</button></div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<br>
+	
+	<@foot/>
+</body>
+</html>
+<@scripts />
+
+<script>
+$(document).ready(function(){
+	/* $("#userName").focus(function(){
+		$(this).grumble(
+			{
+				text: '推荐使用“qq+您的QQ号”',//泡泡中的文本
+				angle: 90,//上偏右角度值
+				type: 'alt-', 
+				distance: 210,//离dom中心的距离
+				showAfter: 0,//触发后-ms后出现
+				hideAfter: 2000,//出现后-ms后消失，不消失为false
+				hasHideButton: false,//有无消失按钮
+				buttonHideText: 'Pop!'//点击后消失
+			}
+		);
+	}); */
+	
+	$("#userName").blur(function(){
+		var yourName=$(this).val();
+		 $.ajax({     
+            //要用post方式      
+            type: 'post',     
+            //方法所在页面和方法名      
+            url: '${ctx!}/login/check_userName/'+yourName,
+            data: '{"yourName":yourName}',
+            contentType: "application/json;charset=UTF-8",     
+            success: function(data) {     
+                //返回的数据用data.user获取内容
+                //alert(data.user);
+                if(1==data.user)
+                {
+                	/* $("#userName").grumble(
+						{
+							text: '恭喜，您要的账号独一无二',//泡泡中的文本
+							angle: 90,//上偏右角度值
+							type: 'alt-', 
+							distance: 210,//离dom中心的距离
+							hideAfter: 2000,//出现后-ms后消失，不消失为false
+						}
+					); */
+                }
+                else
+                {
+                	$("#userName").grumble(
+						{
+							text: 'sorry，您要的账号已被注册',//泡泡中的文本
+							angle: 90,//上偏右角度值
+							distance: 210,//离dom中心的距离
+							showAfter: 0,//触发后-ms后出现
+							hideAfter: false,//出现后-ms后消失，不消失为false
+							hasHideButton: true,//有无消失按钮
+						}
+					);
+                }
+            },     
+            error: function(err) {     
+                alert("sorry，后台出错");
+            }     
+        });     
+		
+	});
+	/* $("#userPassword").focus(function(){
+		$(this).grumble(
+			{
+				text: '复杂度高的密码更加安全哟！',
+				angle: 90,
+				type: 'alt-', 
+				distance: 210,
+				showAfter: 0,
+				hideAfter: 2000,
+			}
+		);
+	}); */
+	$("#userPassword_check").blur(function(){
+		var password=$("#userPassword").val();
+		var password_check=$(this).val();
+		if(password!=password_check)
+		{
+			$(this).grumble(
+				{
+					text: '前后输入的密码不一样呀！',
+					angle: 90,
+					distance: 210,
+					showAfter: 0,
+					hideAfter: false,
+					hasHideButton: true,//有无消失按钮
+				}
+			);
+		};
+	});
+	
+	$("#userRole").focus(function(){
+		$(this).grumble(
+			{
+				text: '注册教师用户需要激活后生效，不能立即登录哟',
+				angle: 90,
+				type: 'alt-', 
+				distance: 50,
+				showAfter: 0,
+				hideAfter: 2000,
+			}
+		);
+	});
+	/* $("#userPhone").blur(function(){
+		var your=$(this).val();
+		var phoneRegWithArea = /^[0][1-9]{2,3}-[0-9]{5,10}$/; 
+		var phoneRegNoArea = /^[1-9]{1}[0-9]{5,8}$/; 
+		if(your.lenght>9)
+		{
+			if(!phoneRegWithArea.test(your))
+			{
+				$("#userPhone").grumble(
+				{
+					text: '号码格式错误！',
+					angle: 90,
+					distance: 210,
+					showAfter: 0,
+					hideAfter: false,
+					hasHideButton: true,//有无消失按钮
+				}
+				);
+			}
+		}
+		else
+		{
+			if(!phoneRegNoArea.test(your))
+			{
+				$("#userPhone").grumble(
+				{
+					text: '号码格式错误！',
+					angle: 90,
+					distance: 210,
+					showAfter: 0,
+					hideAfter: false,
+					hasHideButton: true,//有无消失按钮
+				}
+				);
+			}
+		}
+		
+	});
+	$("#userQq").blur(function(){
+		var your=$(this).val();
+		if(your.search(/^[1-9]d{4,8}$/) == -1)
+		{
+			$("#userQq").grumble(
+				{
+					text: 'QQ号格式错误！',
+					angle: 90,
+					distance: 210,
+					showAfter: 0,
+					hideAfter: false,
+					hasHideButton: true,//有无消失按钮
+				}
+			);
+		}
+		
+	});
+	$("#userEmail").blur(function(){
+		var your=$(this).val();
+		var emailPat=/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+		if (!emailPat.test(your)) {
+			$("#userEmail").grumble(
+				{
+					text: '电子邮件格式错误！',
+					angle: 90,
+					distance: 210,
+					showAfter: 0,
+					hideAfter: false,
+					hasHideButton: true,//有无消失按钮
+				}
+			);
+		}
+	}); */
+	
+});
+</script>
