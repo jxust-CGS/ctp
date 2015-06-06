@@ -51,4 +51,9 @@ public class PaperService
 			"from paper order by createtime desc");
 	}
 
+	public Paper getPaperById(int id)
+	{
+		return Paper.dao.findById(id);
+	}
+
 }
