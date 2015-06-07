@@ -2,17 +2,49 @@
 <@doctype/>
 <html>
 <head>
-<@title name="template"/>
+<@title name="${paper.name!}"/>
 <@styles/>
+<style type="text/css">
+	.problem_no{list-style:none; float:left; width: 66px; height: 66px; text-align: center; line-height: 66px; margin: 2px; border:1px solid #428bca;background-color: white;font-size: 35px; }
+	.problem_no:hover{background-color: #428bca;}
+</style>
+
 </head>
 
 <body style="background: url('${ctx!}/static/styles/images/background/004.gif');">
 	<@head/>
-	
-	This is my HTML page.
-	<br>
-	
+	<br><br><br><br>
+	<div class="container">
+		<ol class="breadcrumb"  style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+			<li><a href="${ctx}">首页</a></li>
+			<li><a href="${ctx}/paper">参加考试</a></li>
+			<li class="active">${paper.name!}</li>
+		</ol>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4" >
+				<div style="float:left; background-color: white; opacity: 0.8; border: 1px solid #428bca;overflow: hidden;">
+					<ul style="padding: 2px;">
+						<li class="problem_no">1</li>
+						<li class="problem_no">A</li>
+						<li class="problem_no">对</li>
+						<li class="problem_no">1</li>
+						<li class="problem_no">1</li>
+						<li class="problem_no">1</li>
+						<li class="problem_no">1</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-8">
+				<div style="background-color: white; opacity: 0.8; border: 1px solid #428bca;">
+					<h1>123</h1>
+				</div>
+			</div>
+		</div>	
+	</div>
 	<@foot/>
 </body>
 </html>
 <@scripts />
+<script src="${ctx!}/static/scripts/portamento/portamento-min.js"></script>
