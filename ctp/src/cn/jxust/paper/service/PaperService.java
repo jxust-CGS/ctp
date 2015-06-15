@@ -47,7 +47,7 @@ public class PaperService
 
 	public Page<Paper> findPage_paper(int pageNumber, int pageSize)
 	{
-	return Paper.dao.paginate(pageNumber, pageSize, "select *",
+		return Paper.dao.paginate(pageNumber, pageSize, "select *",
 			"from paper order by createtime desc");
 	}
 
