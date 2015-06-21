@@ -38,7 +38,7 @@ public class ProblemService
 	{
 		Page<Problem> k=null;
 		k=Problem.dao.paginate(pageNumber, pageSize, "select *",
-				"from problem order by createtime desc");
+				"from problem where sign=1 order by createtime desc");
 		return k;
 	}
 
@@ -85,5 +85,30 @@ public class ProblemService
 	public Problem_judge getProblem_judgeByPro_id(Integer pro_id)
 	{
 		return Problem_judge.dao.findFirst("select * from problem_judge where pro_id=?",pro_id);
+	}
+
+	public Problem_select getProblem_selectById(String id)
+	{
+		return Problem_select.dao.findById(id);
+	}
+
+	public Problem_judge getProblem_judgeById(String id)
+	{
+		return Problem_judge.dao.findById(id);
+	}
+
+	public void updateCorrect(Integer id, Boolean sign)
+	{
+		Problem problem=getProblemById(id);
+		if(sign)
+		{
+			problem.set("do_right_num", problem.getLong("do_right_num")+1);
+			
+		}
+		else
+		{
+			problem.set("do_error_num", problem.getLong("do_error_num")+1);
+		}
+		problem.update();
 	}
 }

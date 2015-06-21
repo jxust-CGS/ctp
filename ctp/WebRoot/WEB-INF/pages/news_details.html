@@ -1,0 +1,32 @@
+<#include "inc/layout.html"/> 
+<@doctype/>
+
+<html lang="zh-cn">
+<head>
+<@title name="通知公告"/> <@styles/>
+</head>
+
+<body style="background: url('${ctx!}/static/styles/images/background/004.gif');" >
+	<@head/>
+	<br />
+	<br />
+	<br />
+	<br />
+	<div class="container">
+		<ol class="breadcrumb"  style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+			<li><a href="${ctx}">首页</a></li>
+			<li class="active">通知公告</li>
+		</ol>
+	</div>
+	<div class="container">
+		<h2 style="text-align: center;">${news.title}</h2>
+		<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+			<div class="panel-body">
+				<p>${news.main_body}</p>
+			</div>
+		</div>
+	</div>
+	<@foot/>
+</body>
+</html>
+<@scripts />

@@ -1,0 +1,74 @@
+<#include "../../inc/layout.html"/> <@doctype/>
+<html>
+<head><@title name="练习"/> <@styles/>
+</head>
+
+<body style="background: url('${ctx!}/static/styles/images/background/004.gif');">
+	<@head/>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="container">
+		<ol class="breadcrumb"
+			style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+			<li><a href="${ctx}">首页</a></li>
+			<li><a href="${ctx}/problem">题库练习</a></li>
+			<li class="active">练习</li>
+		</ol>
+	</div>
+	<div class="container">
+		<!-- 题目为判断题-->
+		<#if sign??>
+		<#if sign = '1'>
+		<div class="alert alert-success alert-dismissible" role="alert"  style="border: 1px solid #428bca">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		   ${massage!} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">题目详解</button>
+		</div>
+		<#else>
+		<div class="alert alert-warning alert-dismissible" role="alert"  style="border: 1px solid #428bca">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  ${massage!} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">题目详解</button>
+		</div>
+		</#if>
+		<!-- Large modal -->
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		     	<div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">题目详解</h4>
+			    </div>
+			    <div class="modal-body">
+			        ${problem_judge.explan!}
+			    </div>
+			    <div class="modal-footer">
+			    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			    </div>
+		    </div>
+		  </div>
+		</div>
+		</#if>
+		<h2 style="text-align: center;">${problem_judge.title}</h2>
+		<h4>题目正文</h4>
+		<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+			<div class="panel-body">
+				<p>${problem_judge.main_body}</p>
+			</div>
+		</div>
+		<h4>请选择</h4>
+		<form role="form" action="${ctx!}/problem/check_judge_answer?id=${problem_judge.id}" method="post">
+		<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+			<div class="panel-body">
+				<input type="radio" name="answer" value="1" required="required"/>正确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="answer" value="0" required="required"/>错误&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button class="btn btn-default" style="text-align: right;" type="submit">提交</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- /.container -->
+	<@foot/>
+</body>
+</html>
+<@scripts />

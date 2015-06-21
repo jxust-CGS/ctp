@@ -45,7 +45,11 @@
 									<td>${s.test_start_time!}</td>
 									<td>${s.test_end_time!}</td>
 									<td>
+										<#if s.test_end_time gt (now?datetime("yyyy-MM-dd HH:mm:ss")) >
 										<a href="${ctx!}/paper/join/${s.id}">参加考试</a>
+										<#else>
+										考试已结束
+										</#if>
 									</td>
 								</tr>
 								</#list>
@@ -71,7 +75,11 @@
 								<#if page.pageNumber+5 lt page.totalPage> 
 								<#assign end_pageNum = page.pageNumber+5 />
 								<#else> 
+								<#if page.totalPage=0>
+								<#assign end_pageNum = 1/> 
+								<#else>
 								<#assign end_pageNum = page.totalPage/> 
+								</#if> 
 								</#if> 
 								<#list start_pageNum..end_pageNum as a> 
 								<#if page.pageNumber==a>
@@ -100,7 +108,7 @@
 </body>
 </html>
 <@scripts />
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document).ready(function() {
 		$('#treeview1').treeview({
 			color : "#428bca",
@@ -114,4 +122,4 @@
 	e.preventDefault()
 		$('#myTab').tab('show')
 	})
-</script>
+</script> -->

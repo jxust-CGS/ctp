@@ -17,8 +17,17 @@ public abstract class BaseController extends Controller
 	@Override
 	public void render(String view)
 	{
+		User user=getSessionAttr("user");
 		this.setAttr("ctx", getRequest().getContextPath());
-		super.render(view);
+		this.setAttr("user", user);
+		if(null==user && !getRequest().getServletPath().equals("/login") && !getRequest().getServletPath().equals("/login/register") && !getRequest().getServletPath().equals("/login/login") && !getRequest().getServletPath().equals("/"))
+		{
+			super.redirect("/login");
+		}
+		else
+		{
+			super.render(view);
+		}
 	}
 	
 	/*获得教师,学生id*/

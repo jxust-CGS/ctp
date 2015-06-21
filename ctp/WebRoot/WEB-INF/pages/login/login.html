@@ -17,17 +17,17 @@
 
 <body style="margin-top: 80px; background: url('${ctx!}/static/styles/images/background_index_1.jpg'); background-size:130% 800px;">
 	<@head/>
-	<#if sign??>
-	<div class="alert alert-warning alert-dismissable">
-	  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	  <strong>系统提示!</strong> ${sign!}
-	</div>
-	</#if>
 	<br>
 	<div class="container">
 		<div class="row" >
 		<div class="col-lg-4 col-lg-offset-1 jumbotron" style="background-color:white; opacity: 0.8;">
 			<form class="form-signin" role="form" method="post" action="${ctx}/login/login">
+				<#if sign??>
+				<div class="alert alert-warning alert-dismissable">
+				  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				  ${sign!}
+				</div>
+				</#if>
 				<h2 class="form-signin-heading">您好！欢迎登陆</h2>
 				<input type="text" class="form-control" size="20" name="user.id" placeholder="用户名" required autofocus>
 				<input type="password" class="form-control" size="20" name="user.password" placeholder="密码" required>

@@ -5,8 +5,8 @@
 <@title name="${paper.name!}"/>
 <@styles/>
 <style type="text/css">
-	.problem_no{list-style:none; float:left; width: 66px; height: 66px; text-align: center; line-height: 66px; margin: 2px; border:1px solid #428bca;background-color: white;font-size: 35px; }
-	.problem_no:hover{background-color: #428bca;}
+	.problem_no{list-style:none;float:left; width: 66px; height: 66px; text-align: center; line-height: 66px; margin: 2px;margin-bottom: 4px; border:1px solid #428bca;background-color: white;font-size: 35px; }
+	.problem_no:hover{background-color: gray;}
 </style>
 
 </head>
@@ -15,36 +15,194 @@
 	<@head/>
 	<br><br><br><br>
 	<div class="container">
-		<ol class="breadcrumb"  style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+		<ol class="breadcrumb"  style="opacity: 0.8; background-color: white; border: 1px solid #428bca;">
 			<li><a href="${ctx}">首页</a></li>
 			<li><a href="${ctx}/paper">参加考试</a></li>
 			<li class="active">${paper.name!}</li>
 		</ol>
 	</div>
+	<#if sign??>
+	<div class="container">
+		<div class="alert alert-warning alert-dismissable" style="border: 1px solid #428bca;">
+		  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		  ${sign!}
+		</div>
+	</div>
+	<#else>
+	<div class="container">
+		<div class="progress">
+  			<div id="used_time_proportion" class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+  				<span>已用时长：</span><span id="used_time"></span>
+  			</div>
+  			<div style="text-align: center;">
+			   	<span>剩余时长：</span><span id="have_time"></span>
+			</div>
+		</div>
+	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-4" >
-				<div style="float:left; background-color: white; opacity: 0.8; border: 1px solid #428bca;overflow: hidden;">
-					<ul style="padding: 2px;">
-						<li class="problem_no">1</li>
-						<li class="problem_no">A</li>
-						<li class="problem_no">对</li>
-						<li class="problem_no">1</li>
-						<li class="problem_no">1</li>
-						<li class="problem_no">1</li>
-						<li class="problem_no">1</li>
+			<div class="col-lg-4 col-md-2 col-xs-1" >
+				<div class="pull-left" style="background-color: white; opacity: 0.8; border: 1px solid #428bca;">
+					<ul style="padding: 2px;" >
+						<#list paper_problem as x>
+						<#if x.answer??>
+						<li class="problem_no" style="background-color: #428bca;" onclick="check_select_problem(${x.problem_id});">${x_index+1}</li>
+						<#else>
+						<li class="problem_no" onclick="check_select_problem(${x.problem_id});">${x_index+1}</li>
+						</#if>
+						</#list>
 					</ul>
 				</div>
-			</div>
-			<div class="col-lg-8">
-				<div style="background-color: white; opacity: 0.8; border: 1px solid #428bca;">
-					<h1>123</h1>
+				<div style="clear:both;"></div>
+				<br>
+				<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+					<div class="panel-body">
+						<p>完成试卷后，记得要提交</p>
+					</div>
+					<div class="panel-footer">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">交卷</button>
+					</div>
+				</div>
+				<!-- Large modal -->
+				
+				<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">再次确认</h4>
+							</div>
+							<div class="modal-body">
+								请确认所有试题都解答完毕！
+							</div>
+							<div class="modal-footer">
+								<a type="button" class="btn btn-primary" href="${ctx}/paper/submit_result/${paper.id}">确认</a>
+								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							</div>
+						
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>	
+			<div class="col-lg-8 col-md-10  col-xs-11">
+				<div style="background-color: white; opacity: 0.8; border: 1px solid #428bca; padding-left: 15px;padding-right: 15px;">
+				<#if problem_judge??><!-- 题目为判断题-->
+				<h2 style="text-align: center;">${problem_judge.title}</h2>
+				<h4>题目正文</h4>
+				<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+					<div class="panel-body">
+						<p>${problem_judge.main_body}</p>
+					</div>
+				</div>
+				<h4>请选择</h4>
+				<form role="form" action="${ctx!}/paper/check_judge_answer/${paper.id}?id=${problem_judge.id}" method="post">
+				<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+				<div class="panel-body">
+					<input type="radio" name="answer" value="1" required="required"/>正确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="answer" value="0" required="required"/>错误&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-default" style="text-align: right;" type="submit">提交</button>
+					</div>
+				</div>
+				</form>
+				</#if>
+				<#if problem_select??><!-- 题目为选择题 -->
+				<h2 style="text-align: center;">${problem_select.title}</h2>
+				<h4>题目正文</h4>
+				<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+					<div class="panel-body">
+						<p>${problem_select.main_body}</p>
+					</div>
+				</div>
+				<h4>请选择</h4>
+				<form role="form" action="${ctx!}/paper/check_select_answer/${paper.id}?id=${problem_select.id}" method="post">
+				<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+					<div class="panel-body">
+					<#list ["A", "B", "C", "D"] as x> 
+						<input type="radio" name="answer" value=${x} required="required"/>${x}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</#list>
+					<button class="btn btn-default" style="text-align: right;" type="submit">提交</button>
+					</div>
+				</div>
+				</form>
+				</#if>
+				</div>
+			</div>
+		</div>
 	</div>
+	</#if>
 	<@foot/>
 </body>
 </html>
 <@scripts />
-<script src="${ctx!}/static/scripts/portamento/portamento-min.js"></script>
+<script type="text/javascript">
+	function check_select_problem(problem_id){
+		window.location.href="${ctx!}/paper/join/${paper.id}?problem_id="+problem_id;
+	};
+	
+	var start=NewDate("${paper.test_start_time}");
+	var end=NewDate("${paper.test_end_time}");
+	var now=NewDate("${now}");
+	window.onload = function(){init()};
+	function init()
+	{
+		var all_time=end.getTime()-start.getTime();
+		var used_time=now.getTime()-start.getTime();
+		var proportion=used_time/all_time;
+		document.getElementById("used_time_proportion").style.width=100*proportion+"%";
+	};
+	
+	setInterval(function(){change_time()},1000);
+	
+	function change_time(){
+		now=new Date(now.getTime()+1000);
+		var all_time=end.getTime()-start.getTime();
+		var have_time=end.getTime()-now.getTime();
+		var used_time=now.getTime()-start.getTime();
+		var proportion=used_time/all_time;
+		document.getElementById("used_time").innerHTML=formatSeconds(used_time/1000);
+		document.getElementById("have_time").innerHTML=formatSeconds(have_time/1000);
+		document.getElementById("used_time_proportion").style.width=100*proportion+"%";
+		if(proportion==1)
+		{
+			window.location.href="${ctx}/paper/submit_result/${paper.id}";
+		}
+	};
+	
+	function formatSeconds(value) 
+	{
+	    var theTime = parseInt(value);// 秒
+	    var theTime1 = 0;// 分
+	    var theTime2 = 0;// 小时
+	    if(theTime > 60) 
+	    {
+	        theTime1 = parseInt(theTime/60);
+	        theTime = parseInt(theTime%60);
+	        if(theTime1 > 60) 
+	        {
+	        theTime2 = parseInt(theTime1/60);
+	        theTime1 = parseInt(theTime1%60);
+	        }
+	    }
+	    var result = ""+parseInt(theTime)+"秒";
+	    if(theTime1 > 0) 
+	    {
+	    result = ""+parseInt(theTime1)+"分"+result;
+	    }
+	    if(theTime2 > 0) 
+	    {
+	    result = ""+parseInt(theTime2)+"小时"+result;
+	    }
+	    return result;
+	};
+	
+	function NewDate(str) { 
+	str = str.split(' ');
+	str1 = str[0].split('-'); 
+	str2 = str[1].split(':'); 
+	var date = new Date(); 
+	date.setUTCFullYear(str1[0], str1[1] - 1, str1[2]); 
+	date.setUTCHours(str2[0],str2[1], str2[2], 0); 
+	return date; 
+	} 
+	
+</script>

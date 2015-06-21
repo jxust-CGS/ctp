@@ -3,8 +3,7 @@
 <head><@title name="题库"/> <@styles/>
 </head>
 
-<body
-	style="background: url('${ctx!}/static/styles/images/background/004.gif');" >
+<body style="background: url('${ctx!}/static/styles/images/background/004.gif');" >
 	<@head/>
 	<br />
 	<br />
@@ -44,6 +43,7 @@
 									<th>科目</th>
 									<th>知识点</th>
 									<th>来源</th>
+									<th>题型</th>
 									<th>正确率</th>
 									<td>练习</td>
 								</tr>
@@ -55,6 +55,13 @@
 									<td>${s.subject!}</td>
 									<td>${s.keyword!}</td>
 									<td>${s.source!}</td>
+									<td style="color: green;">
+									<#if s.type='select'>
+									选择题
+									<#else>
+									判断题
+									</#if>
+									</td>
 									<td>${s.do_right_num!}/${s.do_right_num+s.do_error_num!}</td>
 									<td><a href="${ctx!}/problem/test/${s.id}">练习</a></td>
 								</tr>
@@ -78,7 +85,11 @@
 								<#if page.pageNumber+5 lt page.totalPage>
 								<#assign  end_pageNum = page.pageNumber+5 />
 								<#else>
-								<#assign  end_pageNum = page.totalPage/>
+								<#if page.totalPage=0>
+								<#assign end_pageNum = 1/> 
+								<#else>
+								<#assign end_pageNum = page.totalPage/> 
+								</#if>
 								</#if> 
 								<#list start_pageNum..end_pageNum as a>
 								<#if page.pageNumber==a>
