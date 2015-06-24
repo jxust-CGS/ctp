@@ -1,0 +1,21 @@
+<div class="container">
+	<!-- 题目为选择题 -->
+	<h2 style="text-align: center;">${problem_select.title}</h2>
+	<h4>题目正文</h4>
+	<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+		<div class="panel-body">
+			<p>${problem_select.main_body}</p>
+		</div>
+	</div>
+	<h4>请选择</h4>
+	<form role="form" action="${ctx!}/problem/check_select_answer?id=${problem_select.id}" method="post">
+	<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+		<div class="panel-body">
+		<#list ["A", "B", "C", "D"] as x> 
+			<input type="radio" name="answer" value=${x} required="required"/>${x}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</#list>
+		<button class="btn btn-default" style="text-align: right;" type="submit">提交</button>
+		</div>
+	</div>
+	</form>
+</div>

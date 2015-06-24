@@ -1,0 +1,22 @@
+
+<div class="container">
+<!-- 题目为判断题-->
+<h2 style="text-align: center;">${problem_judge.title}</h2>
+<h4>题目正文</h4>
+<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+	<div class="panel-body">
+		<p>${problem_judge.main_body}</p>
+	</div>
+</div>
+<h4>请选择</h4>
+<form role="form" action="${ctx!}/problem/check_judge_answer?id=${problem_judge.id}" method="post">
+<div class="panel panel-default" style="opacity: 0.8; background-color: white; border: 1px solid #428bca">
+<div class="panel-body">
+	<input type="radio" name="answer" value="1" required="required"/>正确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="radio" name="answer" value="0" required="required"/>错误&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button class="btn btn-default" style="text-align: right;" type="submit">提交</button>
+	</div>
+</div>
+</form>
+</div>
+	
